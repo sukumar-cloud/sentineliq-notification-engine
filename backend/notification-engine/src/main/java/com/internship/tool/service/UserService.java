@@ -69,7 +69,7 @@ public class UserService {
             throw new UserAlreadyExistsException("Username already exists: " + userDetails.getUsername());
         }
 
-        if (!user.getEmail().equals(userDetails.getEmail()) 
+        if (!user.getEmail().equals(userDetails.getEmail())
                 && userRepository.existsByEmail(userDetails.getEmail())) {
             throw new UserAlreadyExistsException("Email already exists: " + userDetails.getEmail());
         }

@@ -1,29 +1,21 @@
 package com.internship.tool.util;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@TestPropertySource(properties = {
+    "jwt.secret=test-secret-key-for-testing-purposes-only",
+    "jwt.expiration=86400000"
+})
 public class JwtUtilTest {
 
+    @Autowired
     private JwtUtil jwtUtil;
-    private String secret = "test-secret-key-for-testing-purposes-only";
-
-    @BeforeEach
-    void setUp() {
-        jwtUtil = new JwtUtil();
-        java.lang.reflect.Field field;
-        try {
-            field = jwtUtil.getClass().getDeclaredField("secret");
-            field.setAccessible(true);
-            field.set(jwtUtil, secret);
-        } catch (Exception e) {
-            fail("Failed to set secret field");
-        }
-    }
 
     @Test
     void testGenerateToken() {
